@@ -9,6 +9,8 @@ import socketserver
 from threading import Condition
 from http import server
 
+import codecs
+
 PAGE="""\
 <html>
 <head>
@@ -45,6 +47,10 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.send_header('Location', '/index.html')
             self.end_headers()
         elif self.path == '/index.html':
+            
+            f=codecs.open("index.html", 'r')
+            PAGE = f.read()
+            
             content = PAGE.encode('utf-8')
             self.send_response(200)
             self.send_header('Content-Type', 'text/html')
