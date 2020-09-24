@@ -11,18 +11,6 @@ from http import server
 
 import codecs
 
-PAGE="""\
-<html>
-<head>
-<title>Raspberry Pi - Camera</title>
-</head>
-<body>
-<center><h1>Raspberry Pi - Camera</h1></center>
-<center><img src="stream.mjpg" width="640" height="480"></center>
-</body>
-</html>
-"""
-
 class StreamingOutput(object):
     def __init__(self):
         self.frame = None
@@ -50,7 +38,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             
             f=codecs.open("index.html", 'r')
             PAGE = f.read()
-            
+
             content = PAGE.encode('utf-8')
             self.send_response(200)
             self.send_header('Content-Type', 'text/html')
