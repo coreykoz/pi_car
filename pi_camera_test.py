@@ -2,6 +2,9 @@
 # Source code from the official PiCamera package
 # http://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
 
+# DC Motor Resources
+# https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/using-dc-motors 
+
 import io
 import picamera
 import logging
@@ -70,6 +73,9 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
         else:
             self.send_error(404)
             self.end_headers()
+
+class StreamingHandler(server.BaseHTTPRequestHandler):
+    
 
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
