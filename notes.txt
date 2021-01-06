@@ -1,0 +1,17 @@
+python -m pip install Django
+
+
+py manage.py runserver
+
+
+databasing:
+ remember the three-step guide to making model changes:
+
+Change your models (in models.py).
+Run python manage.py makemigrations to create migrations for those changes
+Run python manage.py migrate to apply those changes to the database.
+
+
+Each view is responsible for doing one of two things: returning an 
+HttpResponse object containing the content for the requested page, \
+or raising an exception such as Http404. The rest is up to you.
