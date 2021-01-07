@@ -12,7 +12,7 @@ def index(request):
     context = {
         'latest_question_list': latest_question_list,
     }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(request))
 
     #can also use:
     #latest_question_list = Question.objects.order_by('-pub_date')[:5]

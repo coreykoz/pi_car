@@ -26,7 +26,7 @@ with open("secret_key.txt") as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.25', 'raspberrypi']
+ALLOWED_HOSTS = ['192.168.1.25', 'raspberrypi', '192.168.1.254']
 
 
 # Application definition
