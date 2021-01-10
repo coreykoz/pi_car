@@ -38,11 +38,13 @@ def videoStream(request):
         #Uncomment the next line to change your Pi's Camera rotation (in degrees)
         #camera.rotation = 90
         camera.start_recording(output, format='mjpeg')
+        print("camera established")
     response = HttpResponse()
     response['Age'] = 0
     response['Cache-Control'] = 'no-cache, private'
     response['Pragma'] = 'no-cache'
     response['Content-Type'] = 'multipart/x-mixed-replace; boundary=FRAME'
+    print("initial response headers printed")
     try:
         while True:
             with output.condition:
@@ -54,6 +56,7 @@ def videoStream(request):
             response.write(frame)
             response.write(b'\r\n')
             print(response)
+            return response
     finally:
         camera.stop_recording()
     
