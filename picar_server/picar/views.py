@@ -37,7 +37,11 @@ with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
         print("camera established")
 
 def index(request):
-    return render(request, "picar/index.html")
+    response = HttpResponse()
+    template = loader.get_template('picar/index.html')
+    response['Content-Type'] = 'text/html'
+    response['Content-Length'] = len(template)
+    return render(request, response)
 
 def videoStream(request):
     response = HttpResponse()
