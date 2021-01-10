@@ -47,7 +47,9 @@ def videoStream(request):
     response['Content-Type'] = 'multipart/x-mixed-replace; boundary=FRAME'
     print("initial response headers printed")
     try:
+        print("entered try")
         while True:
+            print("entered while loop")
             with output.condition:
                 output.condition.wait()
                 frame = output.frame
