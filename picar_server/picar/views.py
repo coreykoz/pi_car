@@ -53,6 +53,7 @@ def videoStream(request):
             response['Content-Length'] = len(frame)
             response.write(frame)
             response.write(b'\r\n')
+            print(response)
     finally:
         camera.stop_recording()
     
