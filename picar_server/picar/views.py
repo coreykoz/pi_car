@@ -46,16 +46,19 @@ def videoStream(request):
     response['Pragma'] = 'no-cache'
     response['Content-Type'] = 'multipart/x-mixed-replace; boundary=FRAME'
     print("initial response headers printed")
-    while True:
-        with output.condition:
-            output.condition.wait()
-            frame = output.frame
-            print("updated frame")
-        response.write(b'--FRAME\r\n')
-        response['Content-Type'] = 'text/html'
-        response['Content-Length'] = len(frame)
-        response.write(frame)
-        response.write(b'\r\n')
-        print(response)
-        return response
+    try:
+        while True:
+            with output.condition:
+                output.condition.wait()
+                frame = output.frame
+                print("updated frame")
+            response.write(b'--FRAME\r\n')
+            response['Content-Type'] = 'text/html'
+            response['Content-Length'] = len(frame)
+            response.write(frame)
+            response.write(b'\r\n')
+            print(response)
+            return response
+    except:
+        print("An exception occurred")
     
