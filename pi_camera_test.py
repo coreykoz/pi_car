@@ -43,6 +43,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             PAGE = f.read()
 
             content = PAGE.encode('utf-8')
+            print(content)
             self.send_response(200)
             self.send_header('Content-Type', 'text/html')
             self.send_header('Content-Length', len(content))
