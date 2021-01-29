@@ -41,7 +41,7 @@ def index(request):
     template = loader.get_template('picar/index.html')
     response['Content-Type'] = 'text/html'
     response['Content-Length'] = len(str(template))
-    return render(request, response)
+    return response
 
 def videoStream(request):
     response = HttpResponse()

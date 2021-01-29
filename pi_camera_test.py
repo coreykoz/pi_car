@@ -73,6 +73,14 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
         else:
             self.send_error(404)
             self.end_headers()
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+        post_data = self.rfile.read(content_length) # <--- Gets the data itself
+        print(post_data) # <-- Print post data
+        #self.wfile.write("<html><body><h1>POST!</h1><pre>" + post_data + "</pre></body></html>")s
+        self.send_response(200)
+        self.end_headers()
+    
 
 
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
