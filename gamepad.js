@@ -2,7 +2,16 @@
 //Gamepad code from:
 // https://www.smashingmagazine.com/2015/11/gamepad-api-in-web-games/ 
 
-
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "demo_post.asp", true);
+  xhttp.send();
+}
 
 if(!!navigator.getGamepads){
     // Browser supports the Gamepad API
