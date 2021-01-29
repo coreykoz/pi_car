@@ -43,17 +43,13 @@ if(!!navigator.getGamepads){
 
     //left trigger
     if(gamepad.buttons[6].value > 0.5){
-        // FIRE!
+      useBrakes()
     }
 
     //right trigger
     if(gamepad.buttons[7].value > 0.5){
-        // FIRE!
+        useGas()
     }
-
-    //
-
-    
 }
 
 
