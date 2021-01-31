@@ -1,9 +1,29 @@
 <html>
-    
     <head>
         <title>Raspberry Pi - Camera</title>
-        <script src="gamepad.js"></script>
-        <script>function loadDoc() {
+
+        <script>
+            var gamepadAPI = {
+                controller: {},
+                turbo: false,
+                connect: function() {},
+                disconnect: function() {},
+                update: function() {},
+                buttonPressed: function() {},
+                buttons: [],
+                buttonsCache: [],
+                buttonsStatus: [],
+                axesStatus: []
+            };
+            window.addEventListener("gamepadconnected", gamepadAPI.connect);
+            window.addEventListener("gamepaddisconnected", gamepadAPI.disconnect);
+        </script>
+
+
+        
+        <script>
+        
+        function loadDoc() {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
               if (this.readyState == 4 && this.status == 200) {
@@ -12,7 +32,37 @@
             };
             xhttp.open("POST", "demo_post.asp", true);
             xhttp.send();
-          }</script>
+        }
+
+        // Browser supports the Gamepad API
+        if(!!navigator.getGamepads){
+            window.addEventListener("gamepadconnected", function(e) {
+                var gp = navigator.getGamepads()[e.gamepad.index];
+                gamepadInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id + ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
+                gameLoop();
+            });
+            var gamepad = navigator.getGamepads()[0];
+
+            
+
+            var applyDeadzone = function(number, threshold){
+                percentage = (Math.abs(number) - threshold) / (1 - threshold);
+
+                if(percentage < 0)
+                    percentage = 0;
+
+                return percentage * (number > 0 ? 1 : -1);
+            }
+
+            var joystickX = applyDeadzone(gamepad.axes[0], 0.25);
+
+            if(gamepad.buttons[7].value > 0.5){
+                
+            }
+        }
+
+
+        </script>
     </head>
     <body>
         <center><h1>Raspberry Pi - Camera</h1></center>
