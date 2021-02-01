@@ -14,6 +14,10 @@ from http import server
 
 import codecs
 
+# Car Resources
+import time
+from adafruit_motorkit import MotorKit
+
 class StreamingOutput(object):
     def __init__(self):
         self.frame = None
@@ -90,6 +94,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 
 with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
     output = StreamingOutput()
+    kit = MotorKit()
     #Uncomment the next line to change your Pi's Camera rotation (in degrees)
     #camera.rotation = 90
     camera.start_recording(output, format='mjpeg')
