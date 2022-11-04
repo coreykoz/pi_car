@@ -60,6 +60,9 @@ class StreamingHttpHandler(BaseHTTPRequestHandler):
         elif self.path == '/style.css':
             content_type = 'stylesheet'
             tpl = Template(self.server.style_template)
+            content = tpl.safe_substitute(dict(
+                WS_PORT=WS_PORT, WIDTH=WIDTH, HEIGHT=HEIGHT, COLOR=COLOR,
+                BGCOLOR=BGCOLOR))
         else:
             self.send_error(404, 'File not found')
             return
@@ -184,7 +187,7 @@ def main():
             http_thread.join()
             print('Waiting for websockets thread to finish')
             websocket_thread.join()
-            print('Sever closed')
+            print('Server closed')
 
 
 if __name__ == '__main__':
