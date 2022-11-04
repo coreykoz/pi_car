@@ -57,6 +57,8 @@ class StreamingHttpHandler(BaseHTTPRequestHandler):
             content = tpl.safe_substitute(dict(
                 WS_PORT=WS_PORT, WIDTH=WIDTH, HEIGHT=HEIGHT, COLOR=COLOR,
                 BGCOLOR=BGCOLOR))
+        elif self.path == '/style.css':
+            content_type = 'stylesheet'
         else:
             self.send_error(404, 'File not found')
             return
@@ -78,6 +80,8 @@ class StreamingHttpServer(HTTPServer):
             self.index_template = f.read()
         with io.open('frontend/jsmpg.js', 'r') as f:
             self.jsmpg_content = f.read()
+        with io.open('frontend/style.css', 'r') as f:
+            self.style_template = f.read()
 
 
 class StreamingWebSocket(WebSocket):
@@ -161,6 +165,7 @@ def main():
             http_thread.start()
             print('Starting broadcast thread')
             broadcast_thread.start()
+            print('Server initiated')
             while True:
                 camera.wait_recording(1)
         except KeyboardInterrupt:
@@ -178,6 +183,7 @@ def main():
             http_thread.join()
             print('Waiting for websockets thread to finish')
             websocket_thread.join()
+            print('Sever closed')
 
 
 if __name__ == '__main__':
