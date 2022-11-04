@@ -51,7 +51,7 @@ class StreamingHttpHandler(BaseHTTPRequestHandler):
         elif self.path == '/frontend/jsmpg.js':
             content_type = 'application/javascript'
             content = self.server.jsmpg_content
-        elif self.path == '/frontend/index.html':
+        elif self.path == '/index.html':
             content_type = 'text/html; charset=utf-8'
             tpl = Template(self.server.index_template)
             content = tpl.safe_substitute(dict(
