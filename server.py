@@ -59,6 +59,7 @@ class StreamingHttpHandler(BaseHTTPRequestHandler):
                 BGCOLOR=BGCOLOR))
         elif self.path == '/style.css':
             content_type = 'stylesheet'
+            tpl = Template(self.server.style_template)
         else:
             self.send_error(404, 'File not found')
             return
